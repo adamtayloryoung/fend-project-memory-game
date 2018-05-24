@@ -47,3 +47,16 @@ function shuffle(array) {
 
     return array;
 }
+
+function evaluateCards(){
+
+    if(currentlyOpen[0].innerHTML == currentlyOpen[1].innerHTML){
+        cardsMatch();
+    } else {
+        setTimeout(function(){
+           cardsDontMatch(); 
+        }, 700);
+    }
+    moves = moves + 1; 
+    movesCounter.textContent = moves;
+}
