@@ -48,6 +48,19 @@ function shuffle(array) {
     return array;
 }
 
+ function clickShow(e){
+    if(e.target && e.target.nodeName == 'LI'){
+        if(e.target !== currentlyOpen[0]){
+        e.target.classList.add('open');
+        e.target.classList.add('show');
+        currentlyOpen.push(e.target);
+            if(currentlyOpen.length == 2){
+                evaluateCards();
+            }
+        }
+    }
+};
+
 function evaluateCards(){
 
     if(currentlyOpen[0].innerHTML == currentlyOpen[1].innerHTML){
@@ -60,3 +73,7 @@ function evaluateCards(){
     moves = moves + 1; 
     movesCounter.textContent = moves;
 }
+
+cardDeck.addEventListener('click', clickShow); 
+restartButton.addEventListener('click', restartGame);
+
