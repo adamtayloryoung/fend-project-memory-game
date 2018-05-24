@@ -1,6 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
+
 const cardDeck = document.getElementById('cardDeck');
 const $deck = $('.deck');
 const deckArray = ['flask', 'paper-plane-o', 'tree', 'paw', 'cube', 'tree', 'leaf', 'bicycle', 'flask', 'bomb', 'leaf', 'bomb', 'paw', 'bicycle', 'paper-plane-o', 'cube'];
@@ -29,8 +27,6 @@ function restartGame(){
     movesCounter.textContent = moves;
     setUpGame();
 }
-
-
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
