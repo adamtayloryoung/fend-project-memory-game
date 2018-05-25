@@ -4,6 +4,8 @@ const $deck = $('.deck');
 const deckArray = ['flask', 'paper-plane-o', 'tree', 'paw', 'cube', 'tree', 'leaf', 'bicycle', 'flask', 'bomb', 'leaf', 'bomb', 'paw', 'bicycle', 'paper-plane-o', 'cube'];
 const movesCounter = document.querySelector('.moves');
 const restartButton = document.querySelector('.restart');
+const modalWindow = document.querySelector('.bg-modal');
+const playAgain = document.getElementsByClassName('playAgain');
 let allCards = [];
 let currentlyOpen = [];
 let moves = 0;
@@ -11,6 +13,7 @@ let matches = 0;
 
 
 function setUpGame(){
+    modalWindow.style.display = "none";
     allCards = shuffle(deckArray);
     for(let i=0; i < allCards.length; i++){
     $deck.append('<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>');
@@ -24,7 +27,7 @@ function restartGame(){
         cardDeck.firstElementChild.remove();
     }
     moves = 0; 
-    movesCounter.textContent = moves;
+    movesCounter.innerText = moves;
     setUpGame();
 }
 
@@ -60,7 +63,9 @@ function shuffle(array) {
 function evaluateCards(){
 
     if(currentlyOpen[0].innerHTML == currentlyOpen[1].innerHTML){
-        cardsMatch();
+        setTimeout(function(){
+            cardsMatch();
+        }, 200);
     } else {
         setTimeout(function(){
            cardsDontMatch(); 
@@ -76,14 +81,8 @@ function cardsMatch(){
     }
     currentlyOpen = [];
     matches = matches + 1;
-    if(matches === 8 && moves < 10){
-        console.log('3 star performance');
-    } else if (matches === 8 && moves < 15){
-        console.log('2 star performance');
-    } else if (matches === 8 && moves < 20){
-        console.log('1 star performance')
-    } else if (matches === 8 && moves > 20) {
-        console.log('no stars for you.')
+    if(matches === 8){
+    endGame();
     }
 }
 
@@ -96,6 +95,10 @@ function cardsDontMatch(){
     currentlyOpen = [];
 }
 
+function endGame(){
+    modalWindow.style.display = "flex";
+}
+
+
 cardDeck.addEventListener('click', clickShow); 
 restartButton.addEventListener('click', restartGame);
-

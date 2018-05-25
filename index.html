@@ -12,8 +12,18 @@
 
     <div class="container">
         <header>
-            <h1>Matching Game</h1>
+            <h1>Memory</h1>
         </header>
+
+        <div class="bg-modal">
+            <div class="modal-content">
+                <h2 class>YOU WIN!!!</h2>
+                <p>You completed the game in <span class="moves"></span> moves.</p>
+                <p>It took you <span class="time"></span> seconds to complete this game.</p>
+                <div class="stars"><i></i><i></i><i></i></div>
+                <button class="playAgain" value="Play Again?">Play Again?</button>
+            </div>
+        </div>
 
         <section class="score-panel">
         	<ul class="stars">
@@ -22,7 +32,7 @@
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves"></span> Moves
+        	<span class="moves"> </span> Moves
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -33,7 +43,6 @@
   
         </ul>
     </div>
-
 
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
