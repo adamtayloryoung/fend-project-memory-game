@@ -2,10 +2,14 @@
 const cardDeck = document.getElementById('cardDeck');
 const $deck = $('.deck');
 const deckArray = ['flask', 'paper-plane-o', 'tree', 'paw', 'cube', 'tree', 'leaf', 'bicycle', 'flask', 'bomb', 'leaf', 'bomb', 'paw', 'bicycle', 'paper-plane-o', 'cube'];
-const movesCounter = document.querySelector('.moves');
+const moveCounter = document.querySelector('.moves');
 const restartButton = document.querySelector('.restart');
 const modalWindow = document.querySelector('.bg-modal');
-const playAgain = document.getElementsByClassName('playAgain');
+const playAgain = document.querySelector('.playAgain');
+const stars = document.querySelector('.stars');
+const star1 = document.querySelector('.star1');
+const star2 = document.querySelector('.star2');
+const star3 = document.querySelector('.star3');
 let allCards = [];
 let currentlyOpen = [];
 let moves = 0;
@@ -18,6 +22,8 @@ function setUpGame(){
     for(let i=0; i < allCards.length; i++){
     $deck.append('<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>');
     }
+    moves = 0;
+    moveCounter.textContent = moves;
 }
 
 setUpGame();
@@ -26,8 +32,6 @@ function restartGame(){
     for(i = 0; i < 16; i++){
         cardDeck.firstElementChild.remove();
     }
-    moves = 0; 
-    movesCounter.innerText = moves;
     setUpGame();
 }
 
@@ -71,8 +75,9 @@ function evaluateCards(){
            cardsDontMatch(); 
         }, 700);
     }
-    moves = moves + 1; 
-    movesCounter.textContent = moves;
+    moves = moves + 1;
+    moveCounter.textContent = moves;
+    starRating();
 }
 
 function cardsMatch(){
@@ -99,6 +104,24 @@ function endGame(){
     modalWindow.style.display = "flex";
 }
 
+function starRating(){
+    if(moves > 10){
+        star1.style.color = 'black';
+    }
+    if (moves > 15){
+        star2.style.color = 'black';
+    }
+    if (moves > 20) {
+        stars.style.color = 'black';
+    }
+}
+
+// function prepModal(){
+//     document.querySelector('.finalMoves').textContent = moves;
+//     document.querySelector('endStars').appendChild(stars);
+// }
+
 
 cardDeck.addEventListener('click', clickShow); 
 restartButton.addEventListener('click', restartGame);
+playAgain.addEventListener('click', restartGame);

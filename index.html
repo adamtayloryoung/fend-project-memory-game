@@ -15,24 +15,14 @@
             <h1>Memory</h1>
         </header>
 
-        <div class="bg-modal">
-            <div class="modal-content">
-                <h2 class>YOU WIN!!!</h2>
-                <p>You completed the game in <span class="moves"></span> moves.</p>
-                <p>It took you <span class="time"></span> seconds to complete this game.</p>
-                <div class="stars"><i></i><i></i><i></i></div>
-                <button class="playAgain" value="Play Again?">Play Again?</button>
-            </div>
-        </div>
-
         <section class="score-panel">
         	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<li class="star1"><i class="fa fa-star"></i></li>
+        		<li class="star2"><i class="fa fa-star"></i></li>
+        		<li class="star3"><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves"> </span> Moves
+        	<span class="moves"></span> Moves
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -42,6 +32,16 @@
         <ul id="cardDeck" class="deck">
   
         </ul>
+    </div>
+
+    <div class="bg-modal">
+        <div class="modal-content">
+            <h2 class>YOU WIN!!!</h2>
+            <p>You completed the game in <span class="finalMoves"></span> moves.</p>
+            <p>It took you <span class="endTime"></span> seconds to complete this game.</p>
+            <div class="endStars"></div>
+            <button class="playAgain" value="Play Again?">Play Again?</button>
+        </div>
     </div>
 
     <script
