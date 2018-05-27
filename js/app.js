@@ -10,10 +10,12 @@ const stars = document.querySelector('.stars');
 const star1 = document.querySelector('.star1');
 const star2 = document.querySelector('.star2');
 const star3 = document.querySelector('.star3');
+
 let allCards = [];
 let currentlyOpen = [];
 let moves = 0;
 let matches = 0;
+//timer variables
 let displayTime = document.querySelector('.displayTime');
 let interval;
 let seconds = 0;
@@ -35,6 +37,7 @@ function restartGame(){
     for(i = 0; i < 16; i++){
         cardDeck.firstElementChild.remove();
     }
+    stopTimer();
     setUpGame();
 }
 
@@ -107,6 +110,7 @@ function cardsDontMatch(){
 }
 
 function endGame(){
+    stopTimer();
     modalWindow.style.display = "flex";
 }
 
@@ -128,6 +132,8 @@ function starRating(){
 // }
 
 function runTimer(){
+    seconds = 0;
+    minutes = 0;
     interval = setInterval(()=> {
         displayTime.innerHTML = minutes + " mins " + seconds + " secs  ";
         seconds++;
@@ -136,14 +142,14 @@ function runTimer(){
             seconds = 0;
         }
     }, 1000);
+}
 
-    if(matches == 8){
-        clearInterval(interval);
-    }
+function stopTimer(){
+    clearInterval(interval);
 }
 
 
 
 cardDeck.addEventListener('click', clickShow); 
 restartButton.addEventListener('click', restartGame);
-playAgain.addEventListener('click', restartGame);
+// playAgain.addEventListener('click', restartGame);
