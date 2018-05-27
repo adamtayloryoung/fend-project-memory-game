@@ -14,7 +14,10 @@ let allCards = [];
 let currentlyOpen = [];
 let moves = 0;
 let matches = 0;
-
+let displayTime = document.querySelector('.displayTime');
+let interval;
+let seconds = 0;
+let minutes = 0;
 
 function setUpGame(){
     modalWindow.style.display = "none";
@@ -34,7 +37,6 @@ function restartGame(){
     }
     setUpGame();
 }
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -62,6 +64,9 @@ function shuffle(array) {
             }
         }
     }
+    if(moves < 1){
+        runTimer();
+    }
 };
 
 function evaluateCards(){
@@ -75,6 +80,7 @@ function evaluateCards(){
            cardsDontMatch(); 
         }, 700);
     }
+
     moves = moves + 1;
     moveCounter.textContent = moves;
     starRating();
@@ -120,6 +126,22 @@ function starRating(){
 //     document.querySelector('.finalMoves').textContent = moves;
 //     document.querySelector('endStars').appendChild(stars);
 // }
+
+function runTimer(){
+    interval = setInterval(()=> {
+        displayTime.innerHTML = minutes + " mins " + seconds + " secs  ";
+        seconds++;
+        if (seconds == 60){
+            minutes++;
+            seconds = 0;
+        }
+    }, 1000);
+
+    if(matches == 8){
+        clearInterval(interval);
+    }
+}
+
 
 
 cardDeck.addEventListener('click', clickShow); 
