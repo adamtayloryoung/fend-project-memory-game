@@ -27,6 +27,8 @@ let minutes = 0;
 const modalWindow = document.querySelector('.bg-modal');
 const playAgain = document.querySelector('.playAgain');
 
+
+//shuffles and deals cards, ensures timer is set to 0
 function setUpGame(){
     modalWindow.style.display = "none";
     allCards = shuffle(deckArray);
@@ -40,6 +42,7 @@ function setUpGame(){
 
 setUpGame();
 
+// resets game
 function restartGame(){
     for(i = 0; i < 16; i++){
         cardDeck.firstElementChild.remove();
@@ -72,6 +75,9 @@ function shuffle(array) {
     return array;
 }
 
+//on click card will flip and push to currentlyOpen array. 
+//if currentlyOpen contains 2 cards evaluateCards runs.
+//if this is the first move, the timer will stars running on the first click.
  function clickShow(e){
     if(e.target && e.target.nodeName == 'LI'){
         if(e.target !== currentlyOpen[0]){
@@ -88,8 +94,10 @@ function shuffle(array) {
     }
 };
 
+// if the cards match, 'match' class is activated using cardsMatch()
+//if cards do not match, 'open' and 'show' are toggled off with cardsDontMatch()
+//evaluate cards also steps the moves counter and changes star rating
 function evaluateCards(){
-
     if(currentlyOpen[0].innerHTML == currentlyOpen[1].innerHTML){
         setTimeout(function(){
             cardsMatch();
@@ -125,6 +133,7 @@ function cardsDontMatch(){
     currentlyOpen = [];
 }
 
+//
 function starRating(){
     if(moves > 10){
         star1.style.color = 'black';
@@ -141,11 +150,9 @@ function starRating(){
     }
 }
 
-// function prepModal(){
-//     document.querySelector('.finalMoves').textContent = moves;
-//     document.querySelector('endStars').appendChild(stars);
-// }
-
+//functions to start timer using setInterval
+//stop timer using clearInterval
+//clear timer by reseting interface
 function runTimer(){
     seconds = 0;
     minutes = 0;
@@ -169,6 +176,8 @@ function clearTimer(){
     displayTime.innerHTML = minutes + " mins " + seconds + " secs  " ;
 }
 
+//modal window is hidden on the begining of game. After matches == 8, endGame runs & modal becomes visible
+//first modal is prepped using prepModal function
 function prepModal(){
     const finalMoves = document.querySelector('.finalMoves');
     const endMins = document.querySelector('.endMins');
