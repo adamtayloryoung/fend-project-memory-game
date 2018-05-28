@@ -1,16 +1,19 @@
 
-const cardDeck = document.getElementById('cardDeck');
-const $deck = $('.deck');
-const deckArray = ['flask', 'paper-plane-o', 'tree', 'paw', 'cube', 'tree', 'leaf', 'bicycle', 'flask', 'bomb', 'leaf', 'bomb', 'paw', 'bicycle', 'paper-plane-o', 'cube'];
+//score variables
 const moveCounter = document.querySelector('.moves');
 const restartButton = document.querySelector('.restart');
-const modalWindow = document.querySelector('.bg-modal');
-const playAgain = document.querySelector('.playAgain');
 const stars = document.querySelector('.stars');
 const star1 = document.querySelector('.star1');
 const star2 = document.querySelector('.star2');
 const star3 = document.querySelector('.star3');
-
+let starScore = 3;
+const starOne = document.querySelector('.starOne');
+const starTwo = document.querySelector('.starTwo');
+const starThree = document.querySelector('.starThree');
+//cards and marching variables 
+const cardDeck = document.getElementById('cardDeck');
+const $deck = $('.deck');
+const deckArray = ['flask', 'paper-plane-o', 'tree', 'paw', 'cube', 'tree', 'leaf', 'bicycle', 'flask', 'bomb', 'leaf', 'bomb', 'paw', 'bicycle', 'paper-plane-o', 'cube'];
 let allCards = [];
 let currentlyOpen = [];
 let moves = 0;
@@ -20,6 +23,9 @@ let displayTime = document.querySelector('.displayTime');
 let interval;
 let seconds = 0;
 let minutes = 0;
+//modal variables
+const modalWindow = document.querySelector('.bg-modal');
+const playAgain = document.querySelector('.playAgain');
 
 function setUpGame(){
     modalWindow.style.display = "none";
@@ -29,6 +35,7 @@ function setUpGame(){
     }
     moves = 0;
     moveCounter.textContent = moves;
+    clearTimer();
 }
 
 setUpGame();
@@ -38,7 +45,16 @@ function restartGame(){
         cardDeck.firstElementChild.remove();
     }
     stopTimer();
+    clearTimer();
     setUpGame();
+    resetScore();
+}
+
+function resetScore(){
+    starScore = 3;
+    star1.style.color = "gold";
+    star2.style.color = "gold";
+    star3.style.color = "gold";
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -109,20 +125,19 @@ function cardsDontMatch(){
     currentlyOpen = [];
 }
 
-function endGame(){
-    stopTimer();
-    modalWindow.style.display = "flex";
-}
-
 function starRating(){
     if(moves > 10){
         star1.style.color = 'black';
+        starScore = 2;
     }
     if (moves > 15){
         star2.style.color = 'black';
+        starScore = 1;
     }
     if (moves > 20) {
         stars.style.color = 'black';
+        starScore = 0;
+
     }
 }
 
@@ -148,8 +163,34 @@ function stopTimer(){
     clearInterval(interval);
 }
 
+function clearTimer(){
+    minutes = 0;
+    seconds = 0;
+    displayTime.innerHTML = minutes + " mins " + seconds + " secs  " ;
+}
 
+function prepModal(){
+    const finalMoves = document.querySelector('.finalMoves');
+    const endMins = document.querySelector('.endMins');
+    const endSecs = document.querySelector('.endSecs');
+    const endStars = document.querySelector('.endStars');
+    endStars.textContent = starScore;
+    finalMoves.textContent = moves;
+    endMins.textContent = minutes;
+    endSecs.textContent = seconds;
+}
+
+
+function endGame(){
+    stopTimer();
+    prepModal();
+    modalWindow.style.display = "flex";
+}
+
+
+
+//event handlers
 
 cardDeck.addEventListener('click', clickShow); 
 restartButton.addEventListener('click', restartGame);
-// playAgain.addEventListener('click', restartGame);
+playAgain.addEventListener('click', restartGame);
