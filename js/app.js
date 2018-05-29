@@ -7,9 +7,6 @@ const star1 = document.querySelector('.star1');
 const star2 = document.querySelector('.star2');
 const star3 = document.querySelector('.star3');
 let starScore = 3;
-const starOne = document.querySelector('.starOne');
-const starTwo = document.querySelector('.starTwo');
-const starThree = document.querySelector('.starThree');
 //cards and marching variables 
 const cardDeck = document.getElementById('cardDeck');
 const $deck = $('.deck');
@@ -79,20 +76,22 @@ function shuffle(array) {
 //if currentlyOpen contains 2 cards evaluateCards runs.
 //if this is the first move, the timer will stars running on the first click.
  function clickShow(e){
-    if(e.target && e.target.nodeName == 'LI'){
-        if(e.target !== currentlyOpen[0]){
-        e.target.classList.add('open');
-        e.target.classList.add('show');
-        currentlyOpen.push(e.target);
-            if(currentlyOpen.length == 2){
-                evaluateCards();
+    if(currentlyOpen.length < 2){
+        if(e.target && e.target.nodeName == 'LI'){
+            if(e.target !== currentlyOpen[0]){
+            e.target.classList.add('open');
+            e.target.classList.add('show');
+            currentlyOpen.push(e.target);
+                if(currentlyOpen.length == 2){
+                    evaluateCards();
+                }
             }
         }
-    }
-    if(moves < 1){
-        runTimer();
-    }
-};
+        if(moves < 1){
+            runTimer();
+            }
+        } 
+    };
 
 // if the cards match, 'match' class is activated using cardsMatch()
 //if cards do not match, 'open' and 'show' are toggled off with cardsDontMatch()
@@ -126,7 +125,7 @@ function cardsMatch(){
 
 
 function cardsDontMatch(){
-    for(i=0; i < currentlyOpen.length; i++){
+    for(let i=0; i < currentlyOpen.length; i++){
         currentlyOpen[i].classList.toggle('open');
         currentlyOpen[i].classList.toggle('show');
     }
