@@ -29,9 +29,10 @@ body {
 }
 
 h1 {
-    font-family: futura, sans-serif;
+    font-family: futuramedium, sans-serif;
+    letter-spacing: 10px;
     font-weight: 800;
-    letter-spacing: 20px;
+    text-align: center;
 }
 
 h2{
