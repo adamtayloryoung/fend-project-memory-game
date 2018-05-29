@@ -44,6 +44,7 @@ function restartGame(){
     for(i = 0; i < 16; i++){
         cardDeck.firstElementChild.remove();
     }
+    currentlyOpen = [];
     stopTimer();
     clearTimer();
     setUpGame();
